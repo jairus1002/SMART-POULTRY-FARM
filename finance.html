@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Finance - Poultry</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #319151;
+            padding-top: 50px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        h1, h2 {
+            color: #007bff;
+            margin-bottom: 30px;
+        }
+
+        .form-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .btn-primary {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center">Poultry Finance Tracker</h1>
+
+<!-- Expenses Section -->
+<div class="form-section">
+    <h2>Record Your Expenses</h2>
+    <form id="expenseForm" action="expe.php" method="post">
+        <!-- Feed Expenses -->
+        <div class="form-group">
+            <label for="feedExpense">Feed Expenses (KSh):</label>
+            <input type="number" class="form-control" id="feedExpense" name="feed_expe" placeholder="Enter feed expenses" required>
+        </div>
+
+        <!-- Vaccination Expenses -->
+        <div class="form-group">
+            <label for="vaccinationExpense">Vaccination Expenses (KSh):</label>
+            <input type="number" class="form-control" id="vaccinationExpense" name="vaccination_expe" placeholder="Enter vaccination expenses" required>
+        </div>
+
+        <!-- Infrastructure Expenses -->
+        <div class="form-group">
+            <label for="infrastructureExpense">Infrastructure Costs (KSh):</label>
+            <input type="number" class="form-control" id="infrastructureExpense" name="infra_feed" placeholder="Enter infrastructure costs" required>
+        </div>
+
+        <!-- Other Expenses -->
+        <div class="form-group">
+            <label for="otherExpenses">Other Expenses (KSh):</label>
+            <input type="number" class="form-control" id="otherExpenses" name="addition_expe" placeholder="Enter other expenses" required>
+        </div>
+
+        <!-- Total Revenue -->
+        <div class="form-group">
+            <label for="totalRevenue">Total Revenue Generated After Sales (KSh):</label>
+            <input type="number" class="form-control" id="totalRevenue" name="total_revenue" placeholder="Enter total revenue" required>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary mb-3">Submit All Data</button>
+    </form>
+</div>
+
+<!-- Include jQuery if it's not already included -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Graph Section -->
+<div class="form-section">
+    <h2>Expense Graph</h2>
+    <button id="generateGraph" class="btn btn-warning btn-block">Generate Expense Graph</button>
+    <canvas id="expenseGraph" width="400" height="200"></canvas>
+</div>
+
+<!-- Include jQuery (if not already included) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    // When the "Get the Overview" button is clicked
+    $('#getOverviewButton').click(function() {
+        // AJAX request to fetch financial overview data from loss.php
+        $.ajax({
+            url: 'loss.php',  // Path to the PHP file
+            type: 'GET',
+            dataType: 'json',  // Expect JSON response
+            success: function(data) {
+                // Update the placeholders with the returned data
+                $('#grossProfit').text(data.grossProfit);
+                $('#netProfit').text(data.netProfit);
+                $('#losses').text(data.losses);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                // Handle errors
+                console.error("Error fetching data: " + textStatus, errorThrown);
+            }
+        });
+    });
+});
+
+// Generate graph
+document.getElementById('generateGraph').addEventListener('click', function () {
+    const feedExpense = parseFloat(document.getElementById('feedExpense').value);
+    const vaccinationExpense = parseFloat(document.getElementById('vaccinationExpense').value);
+    const infrastructureExpense = parseFloat(document.getElementById('infrastructureExpense').value);
+    const otherExpenses = parseFloat(document.getElementById('otherExpenses').value);
+
+    const ctx = document.getElementById('expenseGraph').getContext('2d');
+    const expenseChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Feed', 'Vaccination', 'Infrastructure', 'Other'],
+            datasets: [{
+                label: 'Expenses (KSh)',
+                data: [feedExpense, vaccinationExpense, infrastructureExpense, otherExpenses],
+                backgroundColor: ['#007bff', '#28a745', '#ffc107', '#dc3545']
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+});
+</script>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Chart.js for graph -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poultry Feed Calculator</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #1e1e1e;
+            color: #dcdcdc;
+            padding-top: 50px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .tech-card {
+            background-color: #2d2d2d;
+            border: none;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #00d1b2;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+            color: #00d1b2;
+        }
+
+        input,
+        select {
+            background-color: #3e3e3e;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+        }
+
+        input::placeholder {
+            color: #a0a0a0;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            box-shadow: 0 0 5px #00d1b2;
+        }
+
+        button {
+            background-color: #00d1b2;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            font-weight: bold;
+            color: #fff;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #00b19e;
+        }
+
+        .result-card {
+            background-color: #2d2d2d;
+            border: none;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .result {
+            border-left: 5px solid #00d1b2;
+            padding-left: 15px;
+            margin-top: 10px;
+            font-size: 1.2em;
+            color: #dcdcdc;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Poultry Feed Calculator</h1>
+        <div class="tech-card">
+            <form id="feedForm">
+                <div class="form-group">
+                    <label for="numPoultry">Number of Poultry:</label>
+                    <input type="number" class="form-control" id="numPoultry" placeholder="Enter number of poultry" required>
+                </div>
+                <div class="form-group">
+                    <label for="age">Age of Poultry (weeks):</label>
+                    <input type="number" class="form-control" id="age" placeholder="Enter age in weeks" required>
+                </div>
+                <div class="form-group">
+                    <label for="type">Type of Poultry:</label>
+                    <select class="form-control" id="type" onchange="showIndigenousOptions()" required>
+                        <option value="">Select poultry type</option>
+                        <option value="broiler">Broiler</option>
+                        <option value="layer">Layer</option>
+                        <option value="indigenous">Indigenous</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="indigenous-options" style="display: none;">
+                    <label for="indigenousType">Indigenous Poultry Type:</label>
+                    <select class="form-control" id="indigenousType">
+                        <option value="">Select indigenous poultry type</option>
+                        <option value="kienyeji">Kienyeji Chicken</option>
+                        <option value="improved_kienyeji">Improved Kienyeji</option>
+                        <option value="dwarf">Dwarf Indigenous Chicken</option>
+                        <option value="indigenous_layers">Indigenous Layers</option>
+                        <option value="dual_purpose">Dual-Purpose Indigenous Poultry</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="feedType">Type of Feed:</label>
+                    <select class="form-control" id="feedType" required>
+                        <option value="">Select feed type</option>
+                        <option value="starter">Starter Feed</option>
+                        <option value="grower">Grower Feed</option>
+                        <option value="finisher">Finisher Feed</option>
+                        <option value="layer">Layer Feed</option>
+                    </select>
+                </div>
+
+                <button type="submit">Calculate Feed Amount</button>
+            </form>
+        </div>
+
+        <div class="result-card" id="result" style="display: none;">
+            <h3 class="mt-3" style="color: #00d1b2;">Feed Amount Required:</h3>
+            <p class="result" id="feedAmount"></p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function showIndigenousOptions() {
+            var type = document.getElementById("type").value;
+            var indigenousOptions = document.getElementById("indigenous-options");
+
+            if (type === "indigenous") {
+                indigenousOptions.style.display = "block"; // Show indigenous options
+            } else {
+                indigenousOptions.style.display = "none"; // Hide indigenous options
+            }
+        }
+
+        document.getElementById('feedForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent form submission
+
+            const numPoultry = parseInt(document.getElementById('numPoultry').value);
+            const age = parseInt(document.getElementById('age').value);
+            const type = document.getElementById('type').value;
+            const feedType = document.getElementById('feedType').value;
+
+            if (!numPoultry || !age || !type || !feedType) {
+                alert('Please fill all fields.');
+                return;
+            }
+
+            let feedAmount = calculateFeedAmount(numPoultry, age, feedType);
+
+            document.getElementById('feedAmount').innerText = `${feedAmount} kg of ${feedType} feed required per day.`;
+            document.getElementById('result').style.display = 'block';
+        });
+
+        // Sample feed calculation based on age and type of feed
+        function calculateFeedAmount(numPoultry, age, feedType) {
+            let baseFeedPerBird = 0;
+
+            if (feedType === 'starter') {
+                baseFeedPerBird = age < 4 ? 0.05 : 0.1; // Starter feed quantity per bird in kg
+            } else if (feedType === 'grower') {
+                baseFeedPerBird = age < 8 ? 0.15 : 0.2; // Grower feed quantity per bird in kg
+            } else if (feedType === 'finisher') {
+                baseFeedPerBird = 0.25; // Finisher feed quantity per bird in kg
+            } else if (feedType === 'layer') {
+                baseFeedPerBird = 0.12; // Layer feed quantity per bird in kg
+            }
+
+            return (baseFeedPerBird * numPoultry).toFixed(2);
+        }
+    </script>
+</body>
+
+</html>

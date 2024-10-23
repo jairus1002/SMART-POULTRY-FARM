@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poultry Vaccination Schedules</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Tech-style customizations */
+    body {
+      background-color: #1e1e2f;
+      color: #d1d1d1;
+      font-family: 'Roboto', sans-serif;
+    }
+    
+    h1, h2, h3 {
+      font-family: 'Roboto Condensed', sans-serif;
+      color: #00adb5;
+    }
+
+    p {
+      color: #a5a5a5;
+    }
+
+    .container {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      background-color: #2a2a40;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      padding: 30px;
+    }
+
+    .border {
+      border-color: #00adb5 !important;
+      background-color: #33334d;
+    }
+
+    .rounded {
+      border-radius: 12px !important;
+    }
+
+    .text-center {
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    /* Image customizations */
+    img {
+      border-radius: 10px;
+      border: 2px solid #00adb5;
+    }
+
+    /* Button styling for tech feel */
+    .btn-tech {
+      background-color: #00adb5;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .btn-tech:hover {
+      background-color: #007f86;
+      cursor: pointer;
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      h1, h2, h3 {
+        font-size: 1.2rem;
+      }
+
+      .container {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="mt-5 mb-4 text-center">Poultry Vaccination Schedules</h1>
+    
+    <!-- Newcastle Disease Vaccination Section -->
+    <section>
+      <h2 class="text-center">Newcastle Disease</h2>
+      <div class="row mt-4">
+        <!-- Dose 1 Subsection -->
+        <div class="col-md-6">
+          <div class="border p-4 rounded">
+            <h3>Dose 1</h3>
+            <p>Administered to broiler and layer chicks within the first day of hatch. This initial vaccination is crucial for building immunity against Newcastle disease.</p>
+            <div>
+              <img src="f.jpg" alt="Newcastle Dose 1" class="img-fluid rounded mt-3">
+            </div>
+          </div>
+        </div>
+        <!-- Dose 2 Subsection -->
+        <div class="col-md-6">
+          <div class="border p-4 rounded">
+            <h3>Dose 2</h3>
+            <p>Follow-up vaccination given to broilers and layers approximately 2-3 weeks after the first dose. This booster shot enhances immunity and ensures long-term protection against Newcastle disease.</p>
+            <div>
+              <img src="h.webp" alt="Newcastle Dose 2" class="img-fluid rounded mt-3">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Bronchitis Vaccination Section -->
+    <section class="mt-5">
+      <h2 class="text-center">Bronchitis</h2>
+      <div class="row mt-4">
+        <!-- Dose 1 Subsection -->
+        <div class="col-md-6">
+          <div class="border p-4 rounded">
+            <h3>Dose 1</h3>
+            <p>Administered to broiler and layer chicks within the first week of age. This initial vaccination helps protect against infectious bronchitis and ensures respiratory health.</p>
+            <div>
+              <img src="i.jpg" alt="Bronchitis Dose 1" class="img-fluid rounded mt-3">
+            </div>
+          </div>
+        </div>
+        <!-- Dose 2 Subsection -->
+        <div class="col-md-6">
+          <div class="border p-4 rounded">
+            <h3>Dose 2</h3>
+            <p>Secondary vaccination given to broilers and layers at around 4-6 weeks of age. This booster dose reinforces immunity against infectious bronchitis and reduces the risk of respiratory diseases.</p>
+            <div>
+              <img src="j.webp" alt="Bronchitis Dose 2" class="img-fluid rounded mt-3">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <div class="row mt-4">
+      <!-- Fowl Pox Vaccination Section -->
+      <div class="col-md-6">
+        <section class="mt-5">
+          <h2 class="text-center">Fowl Pox</h2>
+          <div class="border p-4 rounded">
+            <h3>Single Dose</h3>
+            <p>Administered to broilers and layers at around 8-10 weeks of age. This vaccination provides immunity against fowl pox virus, preventing the development of clinical symptoms.</p>
+            <div>
+              <img src="l.jpg" alt="Fowl Pox" class="img-fluid rounded mt-3">
+            </div>
+          </div>
+        </section>
+      </div>
+    
+      <!-- Marek's Disease Vaccination Section -->
+      <div class="col-md-6">
+        <section class="mt-5">
+          <h2 class="text-center">Marek's Disease</h2>
+          <div class="border p-4 rounded">
+            <h3>Single Dose</h3>
+            <p>Administered to broilers and layers at one day old or as early as possible. Marek's disease vaccination is crucial for preventing tumors and paralysis caused by the Marek's disease virus.</p>
+            <div>
+              <img src="o.webp" alt="Marek's Disease" class="img-fluid rounded mt-3">
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    
+    <div class="text-center mt-5">
+      <button class="btn-tech">Learn More</button>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

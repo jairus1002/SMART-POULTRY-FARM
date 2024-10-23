@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Remind - Poultry Management</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif; /* Modern tech font */
+      background-color: #1b1f3a; /* Dark tech-inspired background */
+      color: #fff; /* Light font color for contrast */
+    }
+
+    .container {
+      margin-top: 50px;
+    }
+
+    .box {
+      background-color: #2c2f48; /* Dark box background */
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 20px rgba(0, 150, 136, 0.5); /* Neon shadow effect */
+      transition: transform 0.3s, box-shadow 0.3s; /* Smooth animation */
+    }
+
+    .box:hover {
+      transform: scale(1.05); /* Slightly enlarge box on hover */
+      box-shadow: 0 0 30px rgba(0, 230, 118, 0.7); /* Green neon effect */
+    }
+
+    .btn-send {
+      background-color: #0f9d58; /* Tech-inspired green button */
+      color: #fff;
+      border-radius: 10px;
+      padding: 10px 20px;
+      border: none;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .btn-send:hover {
+      background-color: #0c7c47; /* Darker green on hover */
+      transform: scale(1.03); /* Slightly larger on hover */
+    }
+
+    h3 {
+      color: #64ffda; /* Neon green font for headings */
+    }
+
+    .form-control {
+      background-color: #23263a; /* Dark form background */
+      color: #fff; /* White text */
+      border: 1px solid #0f9d58; /* Green border */
+      transition: border-color 0.3s;
+    }
+
+    .form-control:focus {
+      border-color: #64ffda; /* Neon green border on focus */
+      box-shadow: 0 0 5px rgba(100, 255, 218, 0.5); /* Neon shadow */
+    }
+
+    .card {
+      background-color: #2c2f48; /* Dark card background */
+      animation: fadeIn 0.5s;
+      border: 1px solid #64ffda; /* Neon green border for card */
+    }
+
+    .card-header {
+      background-color: #0f9d58; /* Header background */
+      color: #fff;
+    }
+
+    .card-body p {
+      color: #fff;
+    }
+
+    /* Additional styling for tech feel */
+    select, input[type="date"], input[type="tel"] {
+      background-color: #23263a; /* Dark input background */
+      color: #fff; /* White text for inputs */
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="box">
+          <h3><i class="fas fa-calendar-alt"></i> Enter Hatching Date</h3>
+          <input type="date" class="form-control" id="hatchingDate">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="box">
+          <h3><i class="fas fa-chicken"></i> Select Type of Poultry</h3>
+          <select class="form-control" id="poultryType">
+            <option value="broilers">Broilers</option>
+            <option value="layers">Layers</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-6">
+        <div class="box">
+          <h3><i class="fas fa-phone-alt"></i> Enter Phone Number</h3>
+          <input type="tel" class="form-control" id="phoneNumber" placeholder="Enter your phone number">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="box">
+          <h3><i class="fas fa-globe"></i> Select Country</h3>
+          <select class="form-control" id="country">
+            <option value="USA">USA</option>
+            <option value="UK">UK</option>
+            <!-- Add more country options as needed -->
+          </select>
+        </div>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-6">
+        <div class="box">
+          <h3><i class="fas fa-cogs"></i> Choose Action</h3>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="action" id="vaccination" value="vaccination">
+            <label class="form-check-label" for="vaccination">
+              Vaccination
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="action" id="management" value="management">
+            <label class="form-check-label" for="management">
+              Management
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <button class="btn btn-send btn-block btn-lg" onclick="sendToDatabase()"><i class="fas fa-paper-plane"></i> Set a Reminder</button>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-md-12">
+        <div class="card border-info" id="summarySection" style="display: none;">
+          <div class="card-header"><i class="fas fa-info-circle"></i> Summary of Entered Information</div>
+          <div class="card-body">
+            <p><strong>Hatching Date:</strong> <span id="summaryHatchingDate"></span></p>
+            <p><strong>Poultry Type:</strong> <span id="summaryPoultryType"></span></p>
+            <p><strong>Phone Number:</strong> <span id="summaryPhoneNumber"></span></p>
+            <p><strong>Country:</strong> <span id="summaryCountry"></span></p>
+            <p><strong>Action:</strong> <span id="summaryAction"></span></p>
+            <button class="btn btn-danger" onclick="clearSummary()">Clear</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <button class="btn btn-send btn-block btn-lg" onclick="activateAction()"><i class="fas fa-check-circle"></i> Confirm Submission</button>
+      </div>
+      <div class="col-md-6">
+        <button class="btn btn-send btn-block btn-lg" onclick="activateNotify()"><i class="fas fa-bell"></i> Finish</button>
+      </div>
+    </div>
+  </div>
+  
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+  // Function to handle form submission
+  function sendToDatabase() {
+  // Retrieve values from inputs
+  var hatchingDate = document.getElementById('hatchingDate').value;
+  var poultryType = document.getElementById('poultryType').value;
+  var phoneNumber = document.getElementById('phoneNumber').value;
+  var country = document.getElementById('country').value;
+  var action = document.querySelector('input[name="action"]:checked').value;
+
+  // Create FormData object
+  var formData = new FormData();
+  formData.append('hatchingDate', hatchingDate);
+  formData.append('poultryType', poultryType);
+  formData.append('phoneNumber', phoneNumber);
+  formData.append('country', country);
+  formData.append('action', action);
+
+  // Send form data to server using fetch API
+  fetch('remind.php', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.text())
+  .then(data => {
+    // Display response message
+    alert(data);
+  })
+  .catch(error => console.error('Error:', error));
+
+  // Update summary
+  document.getElementById('summaryHatchingDate').innerText = hatchingDate;
+  document.getElementById('summaryPoultryType').innerText = poultryType;
+  document.getElementById('summaryPhoneNumber').innerText = phoneNumber;
+  document.getElementById('summaryCountry').innerText = country;
+  document.getElementById('summaryAction').innerText = action;
+
+  // Show the summary section
+  document.getElementById('summarySection').style.display = 'block';
+}
+
+
+  function activateNotify() {
+    // Array of PHP scripts to execute
+    const scripts = ['notify_A.php', 'notify_B.php', 'notify_C.php', 'notify_D.php'];
+
+    // Iterate over each script and send a POST request
+    scripts.forEach(script => {
+        fetch(script, {
+            method: 'POST'
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.text();
+            }
+            throw new Error('Network response was not ok.');
+        })
+        .then(data => {
+            // Display the response from the PHP script
+            console.log("Script executed successfully:", data);
+        })
+        .catch(error => {
+            console.error('Error executing script:', error);
+        });
+    });
+}
+
+
+//run time.php 
+  function activateAction() {
+    // Send a POST request to time.php
+    fetch('time.php', {
+      method: 'POST'
+    })
+    .then(response => {
+      if (response.ok) {
+        return response.text();
+      }
+      throw new Error('Network response was not ok.');
+    })
+    .then(data => {
+      // Display the response from time.php
+      alert("" + data);
+    })
+    .catch(error => {
+      console.error('Error activating action:', error);
+    });
+  }
+
+  
+  // Fetch countries from CSV and populate dropdown menu
+  fetch('all_countries.csv') // <- Place the relative URL to your CSV file here
+    .then(response => response.text())
+    .then(csvData => {
+      // Parse CSV data
+      const countries = csvData.split('\n').map(row => row.split(',')[0]);
+
+      // Populate dropdown menu
+      const countryDropdown = document.getElementById('country');
+      countries.forEach(country => {
+        const option = document.createElement('option');
+        option.text = country;
+        option.value = country;
+        countryDropdown.add(option);
+      });
+    })
+    .catch(error => console.error('Error fetching countries:', error));
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+  body {
+    font-family: Arial, sans-serif; /* Use Arial font as default */
+    background-image: url('logg.jpeg'); /* Specify the path to your background image */
+    background-size: cover; /* Adjusted background size to cover the entire viewport */
+    background-repeat: no-repeat; /* Prevent the background image from repeating */
+    background-position: center; /* Center the background image */
+    color: rgb(10, 10, 10); /* Set text color to white for better readability */
+  }
+  .login-container {
+    min-height: 100vh; /* Set a minimum height to cover the entire viewport */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .card {
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for the card */
+  }
+</style>
+
+
+
+<body>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="text-center">Login</h3>
+        </div>
+        <div class="card-body">
+          <form id="loginForm">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+          </form>
+          <div class="text-center mt-3">
+            <a href="register.html">Register</a> <!-- Link to register.html -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    // Function to handle form submission
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent form from submitting normally
+  
+      // Fetch form data
+      var formData = new FormData(this);
+  
+      // Send form data to server using fetch API
+      fetch('login.php', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.text())
+      .then(data => {
+        // Display response message in an alert
+        alert(data);
+        // Redirect to index.html only if login successful
+        if(data === "Login successful!") {
+          window.location.href = "index.html";
+        }
+      })
+      .catch(error => console.error('Error:', error));
+    });
+</script>
+  
+</body>
+</html>
