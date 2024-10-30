@@ -77,11 +77,13 @@
       background-color: #ffd31e;
       border: none;
       box-shadow: 0 4px 15px rgba(255, 195, 7, 0.5); /* Add glow */
+      transition: all 0.3s ease-in-out; /* Smooth transition */
     }
 
     .btn-primary:hover {
       background-color: #ffde59;
       box-shadow: 0 6px 20px rgba(255, 195, 7, 0.7); /* Enhance glow on hover */
+      transform: scale(1.05); /* Slight scale effect on hover */
     }
 
     /* Style for the contact info */
@@ -103,26 +105,65 @@
       transform: scale(1.1); /* Zoom effect on hover */
       text-shadow: 0 0 20px rgba(255, 193, 7, 0.8); /* Increase glow on hover */
     }
+
+    .info-section {
+      background-color: #343a40; /* Dark background color */
+      color: #ffffff; /* Text color */
+      padding: 50px 20px; /* Padding for the section */
+      width: 100%; /* Ensures it covers full width */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Optional shadow for depth */
+      margin-top: 20px; /* Spacing above */
+    }
+
+    /* Image gallery styles */
+    .image-gallery {
+      margin-top: 20px;
+    }
+
+    .image-gallery img {
+      border-radius: 8px; /* Optional rounded corners for images */
+      transition: transform 0.3s; /* Smooth zoom effect on hover */
+      max-width: 45%; /* Set max width for images */
+    }
+
+    .image-gallery img:hover {
+      transform: scale(1.05); /* Zoom effect on hover */
+    }
   </style>
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Poultry Management System</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+ <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Poultry Management System</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto"></ul>
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link btn btn-primary text-white px-4" href="#">
-            <i class="fas fa-home"></i> Home
-          </a>
-        </li>
+          <!-- Dropdown for Categories -->
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Categories
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="page1.html">Solutions</a>
+                <a class="dropdown-item" href="alert.html">Create Alerts</a> 
+                <a class="dropdown-item" href="viewalerts.html">View Alerts</a>
+                <a class="dropdown-item" href="finance.html">Track Finances</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="contact_us.html">Contact Us</a>
+            </div>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link btn btn-primary text-white px-4" href="#">
+                  <i class="fas fa-home"></i> Home
+              </a>
+          </li>
       </ul>
-    </div>
-  </nav>
+  </div>
+</nav>
+
 
   <div class="container">
     <h1 class="display-4">Poultry Management System</h1>
@@ -153,7 +194,46 @@
       <a href="page1.html" class="btn btn-primary btn-lg">Get Started</a>
     </div>
   </div>
-<!-- Contact Info -->
+
+  <!-- Information Section -->
+  <div class="info-section">
+    <h2 class="display-4 text-center">Why Poultry Management is Important</h2>
+    <p class="lead text-center">
+      Poultry farming is a significant agricultural sector that provides essential nutrition and income to farmers. 
+      Effective management ensures healthy birds, optimal production, and maximum profitability.
+    </p>
+    
+    <div class="row">
+      <div class="col-md-6">
+        <h4 class="text-warning">Key Features of Our System</h4>
+        <ul>
+          <li>Automated Feeding Schedules: Ensure your birds are fed at the right times with minimal effort.</li>
+          <li>Vaccination Reminders: Stay on top of vaccination schedules with timely notifications.</li>
+          <li>Task Management: Easily manage daily tasks and reminders to improve operational efficiency.</li>
+          <li>Reporting Tools: Access comprehensive reports to analyze productivity and health trends.</li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <h4 class="text-warning">Benefits of Using Our System</h4>
+        <ul>
+          <li>Increased Productivity: Optimize your poultry production with smart management.</li>
+          <li>Improved Bird Health: Ensure your flock remains healthy with regular updates and reminders.</li>
+          <li>Time-Saving: Reduce the time spent on manual tasks with automation.</li>
+          <li>Informed Decisions: Make data-driven decisions for better farming practices.</li>
+        </ul>
+      </div>
+    </div>
+    
+    <!-- Image Gallery -->
+    <div class="image-gallery text-center">
+      <h3 class="text-warning"></h3>
+      <img src="c1.webp" alt="Poultry Image 1" class="img-fluid">
+      <img src="c2.webp" alt="Poultry Image 2" class="img-fluid">
+      
+    </div>
+  </div>
+
+  <!-- Contact Info -->
 <div class="container-fluid contact-info" style="background-color: #1a1a1a; padding: 50px; border-radius: 15px; margin-top: 50px;">
   <div class="row justify-content-between align-items-center">
     <div class="col-md-6 text-left">
@@ -194,10 +274,9 @@
     </div>
   </div>
 </div>
-
-  <!-- Bootstrap JS and dependencies -->
+  <!-- Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

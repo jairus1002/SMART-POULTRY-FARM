@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alert Creation - Poultry Management System</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #2c2d2e; /* Light background */
+            color: #333; /* Dark color for text */
+        }
+
+        .alert-container {
+            margin-top: 20px;
+        }
+
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.9); /* White background */
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s;
+        }
+
+        .form-container:hover {
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #007bff; /* Blue for titles */
+            text-shadow: 1px 1px 3px rgba(0, 123, 255, 0.2);
+        }
+
+        .btn-primary {
+            background-color: #007bff; /* Blue button */
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        .btn-secondary {
+            background-color: #6c757d; /* Gray button */
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268; /* Darker gray on hover */
+        }
+
+        .form-group label {
+            font-weight: 600; /* Bold labels */
+        }
+
+        .form-control {
+            border-radius: 10px;
+            border: 1px solid #ced4da;
+        }
+
+        .form-control:focus {
+            border-color: #007bff; /* Blue border on focus */
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="text-center">
+            <h1>Alert Creation</h1>
+            <p>Please fill out the form below to report a disease outbreak.</p>
+        </div>
+        
+        <div class="form-container">
+            <?php if (isset($error) && $error != ""): ?>
+                <div class="alert alert-danger alert-container">
+                    <?php echo $error; ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if (isset($success) && $success != ""): ?>
+                <div class="alert alert-success alert-container">
+                    <?php echo $success; ?>
+                </div>
+            <?php endif; ?>
+
+            <form action="expertpage1.php" method="POST">
+                <div class="form-group">
+                    <label for="disease_name">Disease Name:</label>
+                    <input type="text" class="form-control" id="disease_name" name="disease_name" placeholder="Enter the name of the disease" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea class="form-control" id="description" name="description" rows="4" placeholder="Details about the outbreak" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="location">Location:</label>
+                    <input type="text" class="form-control" id="location" name="location" placeholder="Geographic area affected" required>
+                </div>
+                <div class="form-group">
+                    <label for="date_of_outbreak">Date of Outbreak:</label>
+                    <input type="date" class="form-control" id="date_of_outbreak" name="date_of_outbreak" required>
+                </div>
+                <div class="form-group">
+                    <label for="contact_info">Contact Information (optional):</label>
+                    <input type="text" class="form-control" id="contact_info" name="contact_info" placeholder="Your contact information">
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg">Submit Alert</button>
+                <a href="alert.html" class="btn btn-secondary btn-lg mt-3">Back to Dashboard</a>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

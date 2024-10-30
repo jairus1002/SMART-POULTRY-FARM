@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert Registration - Poultry Management System</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #1b2025;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .registration-container {
+            max-width: 600px;
+            margin: 5% auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 30px;
+            text-shadow: 0 1px 3px rgba(0, 123, 255, 0.1);
+        }
+
+        .form-control:focus {
+            border-color: #28a745;
+            box-shadow: 0px 0px 5px rgba(40, 167, 69, 0.5);
+        }
+
+        .btn-custom {
+            background-color: #28a745;
+            border: none;
+            transition: all 0.3s;
+        }
+
+        .btn-custom:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="registration-container">
+            <h1>Expert Registration</h1>
+            <form action="expertregistration.php" method="POST">
+                <!-- Full Name -->
+                <div class="form-group">
+                    <label for="full_name">Full Name</label>
+                    <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Enter your full name" required>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter a strong password" required>
+                </div>
+
+                <!-- Phone Number -->
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter your phone number" required>
+                </div>
+
+                <!-- Expertise Area -->
+                <div class="form-group">
+                    <label for="expertise_area">Area of Expertise</label>
+                    <input type="text" class="form-control" id="expertise_area" name="expertise_area" placeholder="E.g., Poultry Health, Feed Management" required>
+                </div>
+
+                <!-- Qualification -->
+                <div class="form-group">
+                    <label for="qualification">Qualification</label>
+                    <input type="text" class="form-control" id="qualification" name="qualification" placeholder="E.g., PhD, Veterinary Science" required>
+                </div>
+
+                <!-- Address -->
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <textarea class="form-control" id="address" name="address" rows="3" placeholder="Enter your address" required></textarea>
+                </div>
+
+                <!-- Access Key -->
+                <div class="form-group">
+                    <label for="access_key">Access Key</label>
+                    <input type="password" class="form-control" id="access_key" name="access_key" placeholder="Enter your expert access key" required>
+                    <small class="form-text text-muted">This key is required to verify your status as an expert.</small>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-custom btn-block">Register</button>
+                <a href="farmerlogin.html" class="btn btn-secondary btn-block">Back to Login</a>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

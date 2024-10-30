@@ -1,9 +1,9 @@
 <?php
 // Database connection parameters
 $servername = "localhost";
-$username = "root"; // Your MySQL username
-$password = ""; // Your MySQL password
-$dbname = "poultry2"; // Your database name
+$username = "root";
+$password = "";
+$dbname = "poultry2";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -20,6 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $lastName = $_POST["lastName"];
     $email = $_POST["email"];
     $password = $_POST["password"];
+    $phoneNumber = $_POST["phoneNumber"];  // Correct assignment
 
     // Hash the password
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -29,21 +30,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $conn->query($checkQuery);
 
     if ($result->num_rows > 0) {
-        // Email already registered
-        echo "Email already registered.Try a different one";
+        echo "Email already registered. Try a different one.";
     } else {
-        // Prepare SQL statement
-        $sql = "INSERT INTO registration (first_name, second_name, email, password)
-                VALUES ('$firstName', '$lastName', '$email', '$hashedPassword')";
+        // Prepare SQL statement with correct phone number variable
+        $sql = "INSERT INTO registration (first_name, second_name, email, password, phone_number)
+                VALUES ('$firstName', '$lastName', '$email', '$hashedPassword', '$phoneNumber')";
 
-        // Execute SQL statement
-        if ($conn->query($sql) === TRUE) {
-            // Display registration success message
-            echo "Registration successful. Please go back to log in";
-            exit(); // Ensure script stops executing after displaying the message
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
+// Execute SQL statement
+if ($conn->query($sql) === TRUE) {
+    echo "Registration successful. Please go back to log in.";
+    exit();
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
+        
     }
 }
 

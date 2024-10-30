@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert Alert Creation - Poultry Management System</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); /* Dark gradient */
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #f0f0f0;
+        }
+
+        /* Form Container */
+        .form-container {
+            background: rgba(32, 44, 66, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            max-width: 600px;
+            width: 100%;
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        /* Title and Text Styling */
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #00d4ff;
+            text-shadow: 0 0 15px rgba(0, 212, 255, 0.7);
+        }
+
+        p {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        /* Input and Form Control Styling */
+        .form-control {
+            background-color: #1b2a38;
+            color: #f0f0f0;
+            border: 1px solid #00d4ff;
+            border-radius: 10px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: #00d4ff;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+        }
+
+        /* Button Styling */
+        .btn-primary {
+            background: linear-gradient(45deg, #00c6ff, #0072ff);
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 123, 255, 0.6);
+        }
+
+        .btn-secondary {
+            background-color: #4a4a4a;
+            border: none;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background-color: #3a3a3a;
+            transform: scale(1.05);
+        }
+
+        /* Alert Styling */
+        .alert {
+            margin-top: 20px;
+            background-color: rgba(255, 69, 58, 0.8); /* Vibrant red for error */
+            border-radius: 10px;
+            border: none;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Expert Alert Creation</h1>
+        <p>Report any detected poultry disease outbreak below.</p>
+
+        <?php if (isset($error) && $error != ""): ?>
+            <div class="alert alert-danger">
+                <?php echo $error; ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if (isset($success) && $success != ""): ?>
+            <div class="alert alert-success">
+                <?php echo $success; ?>
+            </div>
+        <?php endif; ?>
+
+        <form action="expertalert2.php" method="POST">
+            <div class="form-group">
+                <label for="disease_name">Disease Name:</label>
+                <input type="text" class="form-control" id="disease_name" name="disease_name" placeholder="Enter the disease name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea class="form-control" id="description" name="description" rows="4" placeholder="Provide a detailed description" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="severity">Severity Level:</label>
+                <select class="form-control" id="severity" name="severity" required>
+                    <option value="" disabled selected>Select severity level</option>
+                    <option value="low">Low</option>
+                    <option value="moderate">Moderate</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="location">Location:</label>
+                <input type="text" class="form-control" id="location" name="location" placeholder="Enter the affected area" required>
+            </div>
+
+            <div class="form-group">
+                <label for="date_of_outbreak">Date of Outbreak:</label>
+                <input type="date" class="form-control" id="date_of_outbreak" name="date_of_outbreak" required>
+            </div>
+
+            <div class="form-group">
+                <label for="contact_info">Contact Information:</label>
+                <input type="text" class="form-control" id="contact_info" name="contact_info" placeholder="Enter your contact details (optional)">
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Submit Alert</button>
+            <a href="alert.html" class="btn btn-secondary btn-lg btn-block mt-3">Back to Dashboard</a>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
